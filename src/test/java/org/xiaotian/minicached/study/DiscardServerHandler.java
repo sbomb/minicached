@@ -19,12 +19,23 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter{
 		    } finally {
 		        ReferenceCountUtil.release(msg); // (2)
 		    }
+		    
+//		    ctx.write("ÄãºÃ") ;
+//		    ctx.flush() ;
 //		 ctx.write(msg) ; 
 //	     ctx.flush() ;
 	}
 	
+	 public void channelReadComplete(ChannelHandlerContext ctx) throws Exception{
+		 System.out.println("sss" + ctx.channel().remoteAddress().toString());
+		 
+		 ctx.write("abcdef") ;
+		 ctx.flush() ;
+	 }
+	
 	public void exceptionCaught(ChannelHandlerContext ctx , Throwable cause){
 		 // Close the connection when an exception is raised.
+		
 		cause.printStackTrace(); 
 		ctx.close() ; 
 	}
