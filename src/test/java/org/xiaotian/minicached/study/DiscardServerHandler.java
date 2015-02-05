@@ -1,6 +1,8 @@
 package org.xiaotian.minicached.study;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
@@ -24,13 +26,39 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter{
 //		    ctx.flush() ;
 //		 ctx.write(msg) ; 
 //	     ctx.flush() ;
+//		    final ByteBuf b = ctx.alloc().buffer(5) ;
+//			 b.writeBytes("hello".getBytes()) ;
+//			 ctx.write(b) ;
+//			 ctx.flush() ;
 	}
 	
 	 public void channelReadComplete(ChannelHandlerContext ctx) throws Exception{
-		 System.out.println("sss" + ctx.channel().remoteAddress().toString());
-		 
-		 ctx.write("abcdef") ;
+//		 System.out.println("sss" + ctx.channel().remoteAddress().toString());
+//		 
+//		 final ByteBuf b = ctx.alloc().buffer(5) ;
+//		 b.writeBytes("hello".getBytes()) ;
+//		 ctx.write(b) ;
+//		 ctx.flush() ;
+	 }
+	 
+	 public void channelActive(final ChannelHandlerContext ctx ) throws Exception{
+//		 final ByteBuf time = ctx.alloc().buffer(4); // (2)
+//	        time.writeInt((int) (System.currentTimeMillis() / 1000L + 2208988800L));
+//
+//	        final ChannelFuture f = ctx.writeAndFlush(time); // (3)
+//	        f.addListener(new ChannelFutureListener() {
+//	            public void operationComplete(ChannelFuture future) {
+//	                assert f == future;
+//	                ctx.close();
+//	            }
+//	        }); // 
+		 //Only execute once.
+		 System.out.print("a");
+		 final ByteBuf b = ctx.alloc().buffer(5) ;
+		 b.writeBytes("hello".getBytes()) ;
+		 ctx.write(b) ;
 		 ctx.flush() ;
+//		 ReferenceCountUtil.release(b) ;
 	 }
 	
 	public void exceptionCaught(ChannelHandlerContext ctx , Throwable cause){
